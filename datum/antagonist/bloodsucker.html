@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;antagonist&#x2F;bloodsucker - &#x2F;tg&#x2F; Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">&#x2F;tg&#x2F; Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="datum/antagonist/bloodsucker.html#proc">Proc Details</a></header>
+<main>
+<h1>bloodsucker <aside>/<a href="datum.html">datum</a>/<a href="datum/antagonist.html">antagonist</a>/<a href="datum/antagonist/bloodsucker.html">bloodsucker</a></aside>
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L1">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 1"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/BuyPower">BuyPower</a></th><td>Buying powers</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/ClaimCoffin">ClaimCoffin</a></th><td>NOTE: This can be any &quot;closet&quot; that you are resting AND inside of.</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/HandleDeath">HandleDeath</a></th><td>FINAL DEATH</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/HandleFeeding">HandleFeeding</a></th><td>mult: SILENT feed is 1/3 the amount</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/HandleHealing">HandleHealing</a></th><td>NOTE: Mult of 0 is just a TEST to see if we are injured and need to go into Torpor!
+It is called from your coffin on close (by you only)</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/HandleStarving">HandleStarving</a></th><td>I am thirsty for blood!</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/LifeTick">LifeTick</a></th><td>Runs from BiologicalLife, handles all the bloodsucker constant proccesses</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/RepairEyes">RepairEyes</a></th><td>Torpor will revive you in case you're dead.</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/RunLair">RunLair</a></th><td>Don't make on_gain() wait for this function to finish. This lets this code run on the side.</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/SelectFirstName">SelectFirstName</a></th><td>Names (EVERYONE gets one))</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/Torpor_Begin">Torpor_Begin</a></th><td>We won't use the spam check, we want to spam them until they notice, else they'll cry about shit being broken.
+Prevents spam
+Prevents them from waking up Mid-day
+Disable ALL Powers</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/admin_add">admin_add</a></th><td>Called when using admin tools to give antag status</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/admin_remove">admin_remove</a></th><td>Called when removing antagonist using admin tools</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/antag_listing_name">antag_listing_name</a></th><td>Name shown on antag list</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/antag_listing_status">antag_listing_status</a></th><td>Whatever interesting things happened to the antag admins should know about
+Include additional information about antag in this part</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/apply_innate_effects">apply_innate_effects</a></th><td>These handles the application of antag huds/special abilities</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/forge_bloodsucker_objectives">forge_bloodsucker_objectives</a></th><td>Create Objectives</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/on_gain">on_gain</a></th><td>Called by the add_antag_datum() mind proc after the instanced datum is added to the mind's antag_datums list.</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/on_removal">on_removal</a></th><td>Called by the remove_antag_datum() and remove_all_antag_datums() mind procs for the antag datum to handle its own removal and deletion.</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/roundend_report">roundend_report</a></th><td>Individual roundend report</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/roundend_report_header">roundend_report_header</a></th><td>Displayed at the start of roundend_category section, default to roundend_category header</td></tr>
+            <tr><th><a href="datum/antagonist/bloodsucker.html#proc/update_sunlight">update_sunlight</a></th><td>Update Sun Time</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/BuyPower"><aside class="declaration">proc </aside>BuyPower<aside>(/<a href="datum.html">datum</a>/<a href="datum/action/bloodsucker.html">action/bloodsucker</a>/power) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L230">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 230"/></a></aside>
+        </h3>
+        <p>Buying powers</p><h3 id="proc/ClaimCoffin"><aside class="declaration">proc </aside>ClaimCoffin<aside>(/<a href="obj.html">obj</a>/<a href="obj/structure/closet.html">structure/closet</a>/<a href="obj/structure/closet/crate.html">crate</a>/claimed) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_coffin.dm#L2">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_coffin.dm 2"/></a></aside>
+        </h3>
+        <p>NOTE: This can be any &quot;closet&quot; that you are resting AND inside of.</p><h3 id="proc/HandleDeath"><aside class="declaration">proc </aside>HandleDeath<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L225">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 225"/></a></aside>
+        </h3>
+        <p>FINAL DEATH</p><h3 id="proc/HandleFeeding"><aside class="declaration">proc </aside>HandleFeeding<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/target, mult) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L88">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 88"/></a></aside>
+        </h3>
+        <p>mult: SILENT feed is 1/3 the amount</p><h3 id="proc/HandleHealing"><aside class="declaration">proc </aside>HandleHealing<aside>(mult) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L124">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 124"/></a></aside>
+        </h3>
+        <p>NOTE: Mult of 0 is just a TEST to see if we are injured and need to go into Torpor!
+It is called from your coffin on close (by you only)</p><h3 id="proc/HandleStarving"><aside class="declaration">proc </aside>HandleStarving<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L198">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 198"/></a></aside>
+        </h3>
+        <p>I am thirsty for blood!</p><h3 id="proc/LifeTick"><aside class="declaration">proc </aside>LifeTick<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L58">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 58"/></a></aside>
+        </h3>
+        <p>Runs from BiologicalLife, handles all the bloodsucker constant proccesses</p><h3 id="proc/RepairEyes"><aside class="declaration">proc </aside>RepairEyes<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L184">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 184"/></a></aside>
+        </h3>
+        <p>Torpor will revive you in case you're dead.</p><h3 id="proc/RunLair"><aside class="declaration">proc </aside>RunLair<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_lair.dm#L28">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_lair.dm 28"/></a></aside>
+        </h3>
+        <p>Don't make on_gain() wait for this function to finish. This lets this code run on the side.</p><h3 id="proc/SelectFirstName"><aside class="declaration">proc </aside>SelectFirstName<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L102">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 102"/></a></aside>
+        </h3>
+        <p>Names (EVERYONE gets one))</p><h3 id="proc/Torpor_Begin"><aside class="declaration">proc </aside>Torpor_Begin<aside>(amInCoffin) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/bloodsucker/bloodsucker_life.dm#L271">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;bloodsucker&#x2F;bloodsucker_life.dm 271"/></a></aside>
+        </h3>
+        <p>We won't use the spam check, we want to spam them until they notice, else they'll cry about shit being broken.
+Prevents spam
+Prevents them from waking up Mid-day
+Disable ALL Powers</p><h3 id="proc/admin_add">admin_add<aside>(/<a href="datum.html">datum</a>/<a href="datum/mind.html">mind</a>/new_owner, /<a href="mob.html">mob</a>/admin) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L216">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 216"/></a></aside>
+        </h3>
+        <p>Called when using admin tools to give antag status</p><h3 id="proc/admin_remove">admin_remove<aside>(/<a href="mob.html">mob</a>/user) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L222">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 222"/></a></aside>
+        </h3>
+        <p>Called when removing antagonist using admin tools</p><h3 id="proc/antag_listing_name">antag_listing_name<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L432">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 432"/></a></aside>
+        </h3>
+        <p>Name shown on antag list</p><h3 id="proc/antag_listing_status">antag_listing_status<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L437">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 437"/></a></aside>
+        </h3>
+        <p>Whatever interesting things happened to the antag admins should know about
+Include additional information about antag in this part</p><h3 id="proc/apply_innate_effects">apply_innate_effects<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/mob_override) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L48">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 48"/></a></aside>
+        </h3>
+        <p>These handles the application of antag huds/special abilities</p><h3 id="proc/forge_bloodsucker_objectives"><aside class="declaration">proc </aside>forge_bloodsucker_objectives<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L393">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 393"/></a></aside>
+        </h3>
+        <p>Create Objectives</p><h3 id="proc/on_gain"><aside class="parent"><a title="/datum/antagonist" href="datum/antagonist.html#proc/on_gain">&uarr;</a></aside>on_gain<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L57">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 57"/></a></aside>
+        </h3>
+        <p>Called by the add_antag_datum() mind proc after the instanced datum is added to the mind's antag_datums list.</p><h3 id="proc/on_removal"><aside class="parent"><a title="/datum/antagonist" href="datum/antagonist.html#proc/on_removal">&uarr;</a></aside>on_removal<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L69">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 69"/></a></aside>
+        </h3>
+        <p>Called by the remove_antag_datum() and remove_all_antag_datums() mind procs for the antag datum to handle its own removal and deletion.</p><h3 id="proc/roundend_report">roundend_report<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L190">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 190"/></a></aside>
+        </h3>
+        <p>Individual roundend report</p><h3 id="proc/roundend_report_header">roundend_report_header<aside>() 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L211">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 211"/></a></aside>
+        </h3>
+        <p>Displayed at the start of roundend_category section, default to roundend_category header</p><h3 id="proc/update_sunlight"><aside class="declaration">proc </aside>update_sunlight<aside>(value, amDay) 
+        
+    
+            <a href="https://github.com/fulpstation/fulpstation/blob/cea424e516cffa82051212cd51df93d6efa67590/fulp_modules/main_features/bloodsuckers/code/antagonists/bloodsucker_datum.dm#L724">
+        <img src="git.png" width="16" height="16" title="fulp_modules&#x2F;main_features&#x2F;bloodsuckers&#x2F;code&#x2F;antagonists&#x2F;bloodsucker_datum.dm 724"/></a></aside>
+        </h3>
+        <p>Update Sun Time</p></main>
+<footer>
+    tgstation.dme
+    <a href="https://github.com/fulpstation/fulpstation/tree/cea424e516cffa82051212cd51df93d6efa67590">cea424e</a>
+        (master) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.3.0</a></footer>
+</body>
+</html>

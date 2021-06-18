@@ -106,7 +106,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// NOTE: Mult of 0 is just a TEST to see if we are injured and need to go into Torpor!
 /// It is called from your coffin on close (by you only)
 /datum/antagonist/bloodsucker/proc/HandleHealing(mult = 1)
 	var/actual_regen = bloodsucker_regen_rate + additional_regen
@@ -124,10 +123,11 @@
 		var/bruteheal = min(C.getBruteLoss_nonProsthetic(), actual_regen) // BRUTE: Always Heal
 		var/fireheal = 0 // BURN: Heal in Coffin while Fakedeath, or when damage above maxhealth (you can never fully heal fire)
 		/// Checks if you're in a coffin here, additionally checks for Torpor right below it.
-		var/amInCoffinWhileTorpor = istype(C.loc, /obj/structure/closet/crate/coffin)
-		if(amInCoffinWhileTorpor && HAS_TRAIT(C, TRAIT_NODEATH))
+		var/amInCoffin = istype(C.loc, /obj/structure/closet/crate/coffin)
+		if(amInCoffin && HAS_TRAIT(C, TRAIT_NODEATH))
 			fireheal = min(C.getFireLoss_nonProsthetic(), actual_regen)
 			mult *= 5 // Increase multiplier if we're sleeping in a coffin.
+			costMult /= 2 // Decrease cost if we're sleeping in a coffin.
 			C.extinguish_mob()
 			C.remove_all_embedded_objects() // Remove Embedded!
 			if(check_limbs(costMult))
@@ -136,22 +136,22 @@
 		else if(HAS_TRAIT(C, TRAIT_NODEATH))
 			mult *= 3
 		/// Heal if Damaged
-		if(bruteheal + fireheal > 0) // Just a check? Don't heal/spend, and return.
+		if((bruteheal + fireheal > 0) && mult != 0) // Just a check? Don't heal/spend, and return.
 			// We have damage. Let's heal (one time)
 			C.adjustBruteLoss(-bruteheal * mult, forced=TRUE) // Heal BRUTE / BURN in random portions throughout the body.
 			C.adjustFireLoss(-fireheal * mult, forced=TRUE)
-			AddBloodVolume((bruteheal * -0.5 + fireheal * -1) / mult * costMult) // Costs blood to heal
+			AddBloodVolume(((bruteheal * -0.5) + (fireheal * -1)) * costMult * mult) // Costs blood to heal
 			return TRUE
 
-/datum/antagonist/bloodsucker/proc/check_limbs(costMult)
-	var/limb_regen_cost = 50 * costMult
+/datum/antagonist/bloodsucker/proc/check_limbs(costMult = 1)
+	var/limb_regen_cost = 50 * -costMult
 	var/mob/living/carbon/C = owner.current
 	var/list/missing = C.get_missing_limbs()
 	if(missing.len && C.blood_volume < limb_regen_cost + 5)
 		return FALSE
 	for(var/targetLimbZone in missing) // 1) Find ONE Limb and regenerate it.
 		C.regenerate_limb(targetLimbZone, FALSE) // regenerate_limbs() <--- If you want to EXCLUDE certain parts, do it like this ----> regenerate_limbs(0, list("head"))
-		AddBloodVolume(50)
+		AddBloodVolume(limb_regen_cost)
 		var/obj/item/bodypart/L = C.get_bodypart(targetLimbZone) // 2) Limb returns Damaged
 		L.brute_dam = 60
 		to_chat(C, "<span class='notice'>Your flesh knits as it regrows your [L]!</span>")
@@ -188,7 +188,7 @@
 		H.Stop()
 	var/obj/item/organ/eyes/E = bloodsuckeruser.getorganslot(ORGAN_SLOT_EYES)
 	if(E)
-		E.flash_protect -= 1
+		E.flash_protect = max(initial(E.flash_protect) - 1, FLASH_PROTECTION_SENSITIVE)
 		E.sight_flags = SEE_MOBS
 		E.see_in_dark = 8
 		E.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
@@ -279,19 +279,17 @@
 	// BLOOD_VOLUME_GOOD: [336] - Pale
 //	handled in bloodsucker_integration.dm
 	// BLOOD_VOLUME_BAD: [224] - Jitter
-	if(owner.current.blood_volume < BLOOD_VOLUME_BAD && !prob(0.5 && HAS_TRAIT(owner, TRAIT_NODEATH)) && !poweron_masquerade)
+	if(owner.current.blood_volume < BLOOD_VOLUME_BAD && prob(0.5) && !HAS_TRAIT(owner.current, TRAIT_NODEATH) && !poweron_masquerade)
 		owner.current.Jitter(3)
 	/// Blood Volume: 250 - Exit Frenzy (If in one) This is really high because we want this to be enough to kill the poor soul they feed off of.
-	if(owner.current.blood_volume >= 250 && Frenzied)
+	if(owner.current.blood_volume >= FRENZY_THRESHOLD_EXIT && Frenzied)
 		Frenzy_End()
 	// BLOOD_VOLUME_SURVIVE: [122]  Blur Vision
 	if(owner.current.blood_volume < BLOOD_VOLUME_SURVIVE)
 		owner.current.blur_eyes(8 - 8 * (owner.current.blood_volume / BLOOD_VOLUME_BAD))
 
 	/// Frenzy & Regeneration - The more blood, the better the Regeneration, get too low blood, and you enter Frenzy.
-	if(owner.current.blood_volume < 25 && !Frenzied)
-		Frenzy_Start()
-	else if(owner.current.blood_volume < 200 && my_clan == CLAN_BRUJAH && !Frenzied)
+	if(owner.current.blood_volume < frenzy_threshold && !Frenzied)
 		Frenzy_Start()
 	else if(owner.current.blood_volume < BLOOD_VOLUME_BAD)
 		additional_regen = 0.1
@@ -299,8 +297,10 @@
 		additional_regen = 0.2
 	else if(owner.current.blood_volume < BLOOD_VOLUME_NORMAL)
 		additional_regen = 0.3
-	else if(owner.current.blood_volume < 700)
+	else if(owner.current.blood_volume < BS_BLOOD_VOLUME_MAX_REGEN)
 		additional_regen = 0.4
+	else
+		additional_regen = 0.5
 
 /// Frenzy's End is in HandleStarving.
 /datum/antagonist/bloodsucker/proc/Frenzy_Start()
@@ -316,9 +316,7 @@
 		ADD_TRAIT(owner.current, TRAIT_MUTE, BLOODSUCKER_TRAIT)
 		ADD_TRAIT(owner.current, TRAIT_DEAF, BLOODSUCKER_TRAIT)
 		// Disable ALL Powers
-		for(var/datum/action/bloodsucker/power in powers)
-			if(power.active)
-				power.DeactivatePower()
+		DisableAllPowers()
 		if(HAS_TRAIT(owner.current, TRAIT_ADVANCEDTOOLUSER))
 			REMOVE_TRAIT(owner.current, TRAIT_ADVANCEDTOOLUSER, SPECIES_TRAIT)
 	owner.current.add_movespeed_modifier(/datum/movespeed_modifier/dna_vault_speedup)
@@ -377,12 +375,11 @@
 			/// Otherwise, check if it's Sol, to enter Torpor.
 			if(clan.bloodsucker_sunlight.amDay)
 				Check_Begin_Torpor(TRUE)
-		/// You are in Torpor, and in a Coffin. Check if it's not Daytime & you have less than 10 Brute/Burn combined to end Torpor.
-		else if(!clan.bloodsucker_sunlight.amDay && total_damage <= 10)
+		/// You are in Torpor, and in a Coffin. Check if you are supposed to end torpor
+		else
 			Check_End_Torpor()
-	/// You're not in a Coffin, but are in Torpor. Check if it's not Daytime, & you have less than 10 Brute (NOT Burn) to end Torpor.
-	else if(!clan.bloodsucker_sunlight.amDay && total_brute <= 10 && HAS_TRAIT(owner.current, TRAIT_NODEATH))
-		Check_End_Torpor()
+	/// You're not in a Coffin, but are in Torpor. Check if you are supposed to end torpor
+	Check_End_Torpor()
 
 /datum/antagonist/bloodsucker/proc/Check_Begin_Torpor(SkipChecks = FALSE)
 	/// Are we entering Torpor via Sol/Death? Then entering it isnt optional!
@@ -397,11 +394,11 @@
 	if(!clan.bloodsucker_sunlight.amDay && total_damage >= 10 && !HAS_TRAIT(owner.current, TRAIT_NODEATH))
 		Torpor_Begin()
 
-/datum/antagonist/bloodsucker/proc/Check_End_Torpor()
-	/// You're not in Sol? (Slept in a Locker for example), then you don't need to leave it.
+/datum/antagonist/bloodsucker/proc/Check_End_Torpor(SkipChecks = FALSE)
+	/// You're not in Torpor? (Slept in a Locker for example), then you don't need to leave it.
 	if(!HAS_TRAIT(owner.current, TRAIT_NODEATH))
 		return
-	/// Sol ended OR Have 0 Brute damage, and you're not in a Coffin? End Torpor.
+	/// Not in a Coffin? End Torpor.
 	if(!istype(owner.current.loc, /obj/structure/closet/crate/coffin))
 		Torpor_End()
 	else
@@ -424,9 +421,7 @@
 	ADD_TRAIT(owner.current, TRAIT_RESISTLOWPRESSURE, BLOODSUCKER_TRAIT)
 	owner.current.Jitter(0)
 	/// Disable ALL Powers
-	for(var/datum/action/bloodsucker/power in powers)
-		if(power.active && !power.can_use_in_torpor)
-			power.DeactivatePower()
+	DisableAllPowers()
 
 /datum/antagonist/bloodsucker/proc/Torpor_End()
 	to_chat(owner.current, "<span class='warning'>You have recovered from Torpor.</span>")

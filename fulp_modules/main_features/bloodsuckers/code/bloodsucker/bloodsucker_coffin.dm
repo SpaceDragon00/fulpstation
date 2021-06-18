@@ -1,7 +1,7 @@
-/datum/antagonist/bloodsucker/proc/ClaimCoffin(obj/structure/closet/crate/claimed)
+/datum/antagonist/bloodsucker/proc/ClaimCoffin(obj/structure/closet/crate/claiming)
 	// ALREADY CLAIMED
-	if(claimed.resident)
-		if(claimed.resident == owner.current)
+	if(claiming.claimed_by)
+		if(claiming.claimed_by == owner.current)
 			to_chat(owner, "This is your [src].")
 		else
 			to_chat(owner, "This [src] has already been claimed by another.")
@@ -10,16 +10,16 @@
 	owner.teach_crafting_recipe(/datum/crafting_recipe/candelabrum)
 	owner.teach_crafting_recipe(/datum/crafting_recipe/meatcoffin)
 	// This is my Lair
-	coffin = claimed
-	lair = get_area(claimed)
-	to_chat(owner, "<span class='userdanger'>You have claimed the [claimed] as your place of immortal rest! Your lair is now [lair].</span>")
+	coffin = claiming
+	lair = get_area(claiming)
+	to_chat(owner, "<span class='userdanger'>You have claimed the [claiming] as your place of immortal rest! Your lair is now [lair].</span>")
 	to_chat(owner, "<span class='danger'>You have learned new construction recipes to improve your lair.</span>")
 	to_chat(owner, "<span class='announce'>Bloodsucker Tip: Find new lair recipes in the Misc tab of the <i>Crafting Menu</i>, including the <i>Persuasion Rack</i> for converting crew into Vassals.</span><br><br>")
 	return TRUE
 
 /// From crate.dm
 /obj/structure/closet/crate
-	var/mob/living/resident /// This lets bloodsuckers claim any "closet" as a Coffin.
+	var/mob/living/claimed_by /// This lets bloodsuckers claim any "closet" as a Coffin.
 	var/pryLidTimer = 250
 	breakout_time = 200
 
@@ -75,7 +75,7 @@
 	if(bloodsuckerdatum)
 		// Successfully claimed?
 		if(bloodsuckerdatum.ClaimCoffin(src))
-			resident = claimant
+			claimed_by = claimant
 			anchored = 1
 			START_PROCESSING(SSprocessing, src)
 
@@ -139,20 +139,20 @@
 					area_turfs -= T*/
 
 /obj/structure/closet/crate/proc/UnclaimCoffin()
-	if(resident)
+	if(claimed_by)
 		// Unclaiming
-		if(resident.mind)
-			var/datum/antagonist/bloodsucker/bloodsuckerdatum = resident.mind.has_antag_datum(/datum/antagonist/bloodsucker)
+		if(claimed_by.mind)
+			var/datum/antagonist/bloodsucker/bloodsuckerdatum = claimed_by.mind.has_antag_datum(/datum/antagonist/bloodsucker)
 			if(bloodsuckerdatum && bloodsuckerdatum.coffin == src)
 				bloodsuckerdatum.coffin = null
 				bloodsuckerdatum.lair = null
-			to_chat(resident, "<span class='cult'><span class='italics'>You sense that the link with your coffin, your sacred place of rest, has been broken! You will need to seek another.</span></span>")
-		resident = null // Remove resident. Because this object isnt removed from the game immediately (GC?) we need to give them a way to see they don't have a home anymore.
+			to_chat(claimed_by, "<span class='cult'><span class='italics'>You sense that the link with your coffin, your sacred place of rest, has been broken! You will need to seek another.</span></span>")
+		claimed_by = null // Remove claimed_by. Because this object isnt removed from the game immediately (GC?) we need to give them a way to see they don't have a home anymore.
 
 /// You cannot lock in/out a coffin's owner. SORRY.
 /obj/structure/closet/crate/coffin/can_open(mob/living/user)
 	if(locked)
-		if(user == resident)
+		if(user == claimed_by)
 			if(welded)
 				welded = FALSE
 				update_icon()
@@ -171,7 +171,7 @@
 		var/datum/antagonist/bloodsucker/bloodsuckerdatum = user.mind.has_antag_datum(/datum/antagonist/bloodsucker)
 		if(bloodsuckerdatum)
 			LockMe(user)
-			if(!bloodsuckerdatum.coffin && !resident)
+			if(!bloodsuckerdatum.coffin && !claimed_by)
 				switch(tgui_alert(user,"Do you wish to claim this as your coffin? [get_area(src)] will be your lair.","Claim Lair", list("Yes", "No")))
 					if("Yes")
 						ClaimCoffin(user)
@@ -184,7 +184,7 @@
 
 /// You cannot weld or deconstruct an owned coffin. Only the owner can destroy their own coffin.
 /obj/structure/closet/crate/coffin/attackby(obj/item/W, mob/user, params)
-	if(resident != null && user != resident)
+	if(claimed_by != null && user != claimed_by)
 		if(opened)
 			if(istype(W, cutting_tool))
 				to_chat(user, "<span class='notice'>This is a much more complex mechanical structure than you thought. You don't know where to begin cutting [src].</span>")
@@ -211,14 +211,14 @@
 		LockMe(user, !locked)
 
 /obj/structure/closet/crate/proc/LockMe(mob/user, inLocked = TRUE)
-	if(user == resident)
+	if(user == claimed_by)
 		if(!broken)
 			locked = inLocked
 			to_chat(user, "<span class='notice'>You flip a secret latch and [locked?"":"un"]lock yourself inside [src].</span>")
 		else
-			to_chat(resident, "<span class='notice'>The secret latch to lock [src] from the inside is broken. You set it back into place...</span>")
-			if(do_mob(resident, src, 5 SECONDS))
+			to_chat(claimed_by, "<span class='notice'>The secret latch to lock [src] from the inside is broken. You set it back into place...</span>")
+			if(do_mob(claimed_by, src, 5 SECONDS))
 				if(broken) // Spam Safety
-					to_chat(resident, "<span class='notice'>You fix the mechanism and lock it.</span>")
+					to_chat(claimed_by, "<span class='notice'>You fix the mechanism and lock it.</span>")
 					broken = FALSE
 					locked = TRUE

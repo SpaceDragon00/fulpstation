@@ -121,7 +121,8 @@
 		var/amInCoffin = istype(C.loc, /obj/structure/closet/crate/coffin)
 		if(amInCoffin && HAS_TRAIT(C, TRAIT_NODEATH))
 			if(poweron_masquerade)
-				to_chat(C, "<span class='warning'>You will not heal while your Masquerade ability is active.</span>")
+				to_chat(C, "<span class='warning'>You return to your true form once again to mend your wounds.</span>")
+				DeactivateAllPowers()
 			fireheal = min(C.getFireLoss_nonProsthetic(), actual_regen)
 			mult *= 5 // Increase multiplier if we're sleeping in a coffin.
 			costMult /= 2 // Decrease cost if we're sleeping in a coffin.

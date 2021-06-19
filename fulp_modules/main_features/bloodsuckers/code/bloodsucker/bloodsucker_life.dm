@@ -33,25 +33,20 @@
 			owner.current.adjustFireLoss(10)
 			owner.current.adjust_fire_stacks(2)
 			owner.current.IgniteMob()
-	if(my_clan == CLAN_MALKAVIAN && prob(25) && !poweron_masquerade)
+	if(my_clan == CLAN_MALKAVIAN && prob(15) && !poweron_masquerade && owner.current.stat)
 		switch(rand(0,4))
 			if(0) // 20% chance to call out a player at their location
 				for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list))
+					if(!H.mind)
+						continue
 					if(H.stat == DEAD || HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION))
 						continue
 					if(!SSjob.GetJob(H.mind.assigned_role) || (H.mind.assigned_role in GLOB.nonhuman_positions) || !is_station_level(H))
 						continue
 					var/area/A = get_area(H)
 					owner.current.say("#...oh dear... [H]... what are you doing... at [A]?")
-			if(1) // 20% chance to call out a DEAD player at their location
-				for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list))
-					if(!H.stat == DEAD)
-						continue
-					if(!SSjob.GetJob(H.mind.assigned_role) || (H.mind.assigned_role in GLOB.nonhuman_positions))
-						continue
-					var/area/A = get_area(H)
-					owner.current.say("#[H]... why would you perish at [A]?")
-			else // 60% chance to say some malkavian revelation
+					break
+			else // 80% chance to say some malkavian revelation
 				owner.current.say(pick(strings("malkavian_revelations.json", "revelations", "fulp_modules")))
 	// Standard Updates
 	HandleDeath()
@@ -125,6 +120,8 @@
 		/// Checks if you're in a coffin here, additionally checks for Torpor right below it.
 		var/amInCoffin = istype(C.loc, /obj/structure/closet/crate/coffin)
 		if(amInCoffin && HAS_TRAIT(C, TRAIT_NODEATH))
+			if(poweron_masquerade)
+				to_chat(C, "<span class='warning'>You will not heal while your Masquerade ability is active.</span>")
 			fireheal = min(C.getFireLoss_nonProsthetic(), actual_regen)
 			mult *= 5 // Increase multiplier if we're sleeping in a coffin.
 			costMult /= 2 // Decrease cost if we're sleeping in a coffin.

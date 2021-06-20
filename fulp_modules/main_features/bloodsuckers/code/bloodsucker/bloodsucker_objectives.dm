@@ -363,11 +363,7 @@
 // EXPLANATION
 /datum/objective/bloodsucker/vassal/update_explanation_text()
 	. = ..()
-	explanation_text = "Guarantee the success of your Master's mission! Their objectives are as follows: \n"
-	var/datum/antagonist/vassal/our_vassal = owner.has_antag_datum(/datum/antagonist/vassal)
-	var/datum/antagonist/bloodsucker/our_master = our_vassal.master
-	if(our_master)
-		explanation_text += our_master.objectives.Join("\n")
+	explanation_text = "Guarantee the success of your Master's mission!"
 
 
 // WIN CONDITIONS?

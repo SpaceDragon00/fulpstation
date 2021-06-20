@@ -121,8 +121,7 @@
 		var/amInCoffin = istype(C.loc, /obj/structure/closet/crate/coffin)
 		if(amInCoffin && HAS_TRAIT(C, TRAIT_NODEATH))
 			if(poweron_masquerade)
-				to_chat(C, "<span class='warning'>You return to your true form once again to mend your wounds.</span>")
-				DeactivateAllPowers()
+				to_chat(C, "<span class='warning'>You will not heal while your Masquerade ability is active.</span>")
 			fireheal = min(C.getFireLoss_nonProsthetic(), actual_regen)
 			mult *= 5 // Increase multiplier if we're sleeping in a coffin.
 			costMult /= 2 // Decrease cost if we're sleeping in a coffin.
@@ -306,7 +305,7 @@
 		to_chat(owner.current, "<span class='announce'>You enter a Frenzy!<br> \
 		* While in Frenzy, you gain the ability to instantly aggressively grab people, move faster and have no blood cost on abilities.<br> \
 		* In exchange, you will slowly gain Burn damage, be careful of how you handle it!<br> \
-		* To leave Frenzy, simply drink enough Blood (250) to exit.</span><br>")
+		* To leave Frenzy, simply drink enough Blood ([FRENZY_THRESHOLD_EXIT]) to exit.</span><br>")
 	else
 		to_chat(owner.current, "<span class='userdanger'><FONT size = 3>Blood! You need Blood, now! You enter a total Frenzy!</span>")
 		to_chat(owner.current, "<span class='announce'>* Bloodsucker Tip: While in Frenzy, you instantly Aggresively grab, cannot speak, hear, get stunned, or use any powers outside of Feed and Trespass (If you have it).</span><br>")
@@ -373,11 +372,12 @@
 			/// Otherwise, check if it's Sol, to enter Torpor.
 			if(clan.bloodsucker_sunlight.amDay)
 				Check_Begin_Torpor(TRUE)
-		/// You are in Torpor, and in a Coffin. Check if you are supposed to end torpor
-		else
+		/// You are in Torpor, and in a Coffin. Check if it's not Daytime & you have less than 10 Brute/Burn combined to end Torpor. WILLARD TODO: Condense all the checks into Check_End_Torpor(), then just call that instead of checking twice.6
+		else if(!clan.bloodsucker_sunlight.amDay && total_damage <= 10)
 			Check_End_Torpor()
-	/// You're not in a Coffin, but are in Torpor. Check if you are supposed to end torpor
-	Check_End_Torpor()
+	/// You're not in a Coffin, but are in Torpor. Check if it's not Daytime, & you have less than 10 Brute (NOT Burn) to end Torpor.
+	else if(!clan.bloodsucker_sunlight.amDay && total_brute <= 10 && HAS_TRAIT(owner.current, TRAIT_NODEATH))
+		Check_End_Torpor()
 
 /datum/antagonist/bloodsucker/proc/Check_Begin_Torpor(SkipChecks = FALSE)
 	/// Are we entering Torpor via Sol/Death? Then entering it isnt optional!
@@ -392,7 +392,7 @@
 	if(!clan.bloodsucker_sunlight.amDay && total_damage >= 10 && !HAS_TRAIT(owner.current, TRAIT_NODEATH))
 		Torpor_Begin()
 
-/datum/antagonist/bloodsucker/proc/Check_End_Torpor(SkipChecks = FALSE)
+/datum/antagonist/bloodsucker/proc/Check_End_Torpor()
 	/// You're not in Torpor? (Slept in a Locker for example), then you don't need to leave it.
 	if(!HAS_TRAIT(owner.current, TRAIT_NODEATH))
 		return

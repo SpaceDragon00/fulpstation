@@ -245,7 +245,7 @@
 // EXPLANATION
 /datum/objective/bloodsucker/heartthief/update_explanation_text()
 	. = ..()
-	explanation_text = "Steal and keep [target_amount] organic heart\s." // TO DO: Limit them to Human Only!
+	explanation_text = "Steal and keep [target_amount] organic heart\s."
 
 // WIN CONDITIONS?
 /datum/objective/bloodsucker/heartthief/check_completion()

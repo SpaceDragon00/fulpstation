@@ -96,7 +96,7 @@
 /datum/objective/bloodsucker/protege/update_explanation_text()
 	. = ..()
 	if(target_role == "HEAD")
-		explanation_text = "Guarantee a Vassal ends up as a Department Head or in a Leadership role, or convert an existing Head via the Persuasion Rack."
+		explanation_text = "Guarantee a Department Head or someone in a Leadership role is your loyal servant by the end of the day via the Persuasion Rack."
 	else
 		explanation_text = "Have [target_amount] Vassal\s in the [department_string] department via the Persuasion Rack."
 

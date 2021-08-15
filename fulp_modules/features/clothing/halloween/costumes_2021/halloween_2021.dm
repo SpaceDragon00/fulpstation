@@ -132,7 +132,7 @@
 
 /obj/item/clothing/mask/breather_mask
 	name = "Breather mask"
-	desc = "A tight green balaclava with breathing apparatus strapped to the front."
+	desc = "A tight green balaclava with a breathing apparatus strapped to the front."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/breather_mask_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/breather_mask_worn.dmi'
 	icon_state = "breathermask"

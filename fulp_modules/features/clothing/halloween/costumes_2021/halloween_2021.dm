@@ -73,7 +73,7 @@
 
 /obj/item/clothing/gloves/propeller_gloves
 	name = "Propeller gloves"
-	desc = "A tight yet comfortable pair of gloves."
+	desc = "A tight, yet comfortable pair of gloves."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'
 	icon_state = "propeller_gloves"

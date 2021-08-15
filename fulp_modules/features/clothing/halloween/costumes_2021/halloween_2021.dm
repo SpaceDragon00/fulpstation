@@ -53,7 +53,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDEHAIR
 
 /obj/item/clothing/suit/hooded/propeller_suit
-	name = "PropellerSuit"
+	name = "Propeller Suit"
 	desc = "A tight, yet comfortable green suit."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'
@@ -63,7 +63,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/propeller_head
 
 /obj/item/clothing/head/hooded/propeller_head
-	name = "Propellerhead"
+	name = "Propeller head"
 	desc = "A reflective gold helmet with a makeshift propeller device fastened ontop."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'
@@ -72,7 +72,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDEHAIR
 
 /obj/item/clothing/gloves/propeller_gloves
-	name = "propeller gloves"
+	name = "Propeller gloves"
 	desc = "A tight yet comfortable pair of gloves."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'

@@ -32,7 +32,7 @@
 	new /obj/item/clothing/suit/oldhunter(src)
 	new /obj/item/clothing/head/oldhunter(src)
 
-//SHOVEL KNIGHT
+// SHOVEL KNIGHT
 
 /obj/item/clothing/suit/spectre_suit
 	name = "Spectre knight's robes"

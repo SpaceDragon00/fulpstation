@@ -53,7 +53,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDEHAIR
 
 /obj/item/clothing/suit/hooded/propeller_suit
-	name = "Propeller Suit"
+	name = "Propeller suit"
 	desc = "A tight, yet comfortable green suit."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'

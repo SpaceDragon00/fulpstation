@@ -35,7 +35,7 @@
 // SHOVEL KNIGHT
 
 /obj/item/clothing/suit/spectre_suit
-	name = "Spectre knight's robes"
+	name = "Spectre Knight's robes"
 	desc = "A darkened blood red robe with little armour."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'

@@ -32,10 +32,10 @@
 	new /obj/item/clothing/suit/oldhunter(src)
 	new /obj/item/clothing/head/oldhunter(src)
 
-//SHOVEL KNIGHT
+// SHOVEL KNIGHT
 
 /obj/item/clothing/suit/spectre_suit
-	name = "Spectre knight's robes"
+	name = "Spectre Knight's robes"
 	desc = "A darkened blood red robe with little armour."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'
@@ -44,7 +44,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 /obj/item/clothing/head/spectre_head
-	name = "Spectre knight's helmet"
+	name = "Spectre Knight's helmet"
 	desc = "A blood red hood, attatched to a reflective gold visor."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'
@@ -92,7 +92,7 @@
 	new /obj/item/clothing/suit/hooded/propeller_suit(src)
 	new /obj/item/clothing/gloves/propeller_gloves(src)
 
-//HART
+// HART
 
 /obj/item/clothing/under/hart_body
 	name = "Hart body"
@@ -132,7 +132,7 @@
 
 /obj/item/clothing/mask/breather_mask
 	name = "Breather mask"
-	desc = "A tight green balaclava with breathing apparatus strapped to the front."
+	desc = "A tight green balaclava with a breathing apparatus strapped to the front."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/breather_mask_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/breather_mask_worn.dmi'
 	icon_state = "breathermask"

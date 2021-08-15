@@ -92,7 +92,7 @@
 	new /obj/item/clothing/suit/hooded/propeller_suit(src)
 	new /obj/item/clothing/gloves/propeller_gloves(src)
 
-//HART
+// HART
 
 /obj/item/clothing/under/hart_body
 	name = "Hart body"

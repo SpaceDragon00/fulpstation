@@ -44,7 +44,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 /obj/item/clothing/head/spectre_head
-	name = "Spectre knight's helmet"
+	name = "Spectre Knight's helmet"
 	desc = "A blood red hood, attatched to a reflective gold visor."
 	icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_item.dmi'
 	worn_icon = 'fulp_modules/features/clothing/halloween/costumes_2021/shovelknight_worn.dmi'

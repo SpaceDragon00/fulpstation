@@ -5,23 +5,23 @@
  */
 
 /obj/machinery/vending/autodrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/clown_shoes/digitigrade = 1,
-		/obj/item/clothing/shoes/mime/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/clown_shoes/digitigrade = 1,
+	//	/obj/item/clothing/shoes/mime/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/clothing/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/sandal/digitigrade = 1,
-		/obj/item/clothing/shoes/brown/digitigrade = 3,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/sandal/digitigrade = 1,
+	//	/obj/item/clothing/shoes/brown/digitigrade = 3,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/sec_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/jackboots/digitigrade = 2,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/jackboots/digitigrade = 2,
+	//)
 	return ..()
 
 //SecTech
@@ -35,97 +35,97 @@
 	return ..()
 
 /obj/machinery/vending/wardrobe/engi_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/workboots/digitigrade = 3,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/workboots/digitigrade = 3,
+	//)
 	contraband += list(
 		/obj/item/toy/plush/supermatter = 2,
 	)
 	return ..()
 
 /obj/machinery/vending/wardrobe/atmos_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/cargo_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-		/obj/item/clothing/shoes/workboots/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//	/obj/item/clothing/shoes/workboots/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/robo_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/science_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 2,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 2,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/hydro_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 2,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 2,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/curator_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/laceup/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/laceup/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/bar_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/laceup/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/laceup/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/chef_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/law_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/laceup/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/laceup/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/chap_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/medi_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/chem_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/viro_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/brown/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/brown/digitigrade = 1,
+	//)
 	return ..()
 
 /obj/machinery/vending/wardrobe/det_wardrobe/Initialize(mapload)
-	products += list(
-		/obj/item/clothing/shoes/laceup/digitigrade = 1,
-	)
+	//products += list(
+	//	/obj/item/clothing/shoes/laceup/digitigrade = 1,
+	//)
 	return ..()
 
 ///Library Toy vendor
@@ -138,8 +138,8 @@
 
 /// Mining Equipment Vendor
 /obj/machinery/mineral/equipment_vendor/Initialize(mapload)
-	prize_list += list(
-		new /datum/data/mining_equipment("Digitigrate Combat Boots", /obj/item/clothing/shoes/digicombat, 450),
-		new /datum/data/mining_equipment("Digitigrade Jump Boots", /obj/item/clothing/shoes/bhop/digitigrade, 2500),
-	)
+	//prize_list += list(
+	//	new /datum/data/mining_equipment("Digitigrate Combat Boots", /obj/item/clothing/shoes/digicombat, 450),
+	//	new /datum/data/mining_equipment("Digitigrade Jump Boots", /obj/item/clothing/shoes/bhop/digitigrade, 2500),
+	//)
 	return ..()
